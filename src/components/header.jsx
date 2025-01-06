@@ -26,7 +26,7 @@ export default function Header() {
                     </div>
 
                     <Button asChild variant="outline">
-                        <Link href="/login">Login</Link>
+                        <Link href="/dashboard">Dashboard</Link>
                     </Button>
                 </div>
             </nav>

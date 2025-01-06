@@ -1,14 +1,20 @@
 export default async function logout() {
     try {
-        const Response = await fetch("http://localhost:3000/api/admin/logout", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/logout`, {
             method: "POST",
+            cache: "no-store",
+            credentials: "include",
         });
-        console.log(Response);
-        if (Response.status == 200) {
-            // Handle successful logout here (e.g., store token, redirect, etc.)
-            console.log("logged out sucessfully");
+
+        if (response.status === 200) {
+            console.log("Logged out successfully");
+            return true; // Indicate success
+        } else {
+            console.error("Failed to log out", response.status);
+            return false; // Indicate failure
         }
     } catch (error) {
-        console.error("error occured while logging out: " + error);
+        console.error("Error occurred while logging out:", error);
+        return false;
     }
 }

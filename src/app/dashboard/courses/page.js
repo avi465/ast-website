@@ -1,16 +1,12 @@
-import { v4 as uuidv4 } from 'uuid';
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import {
-    File,
-    ListFilter,
-    MoreHorizontal,
-    PlusCircle,
-} from "lucide-react"
-
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+import Image from "next/image";
+import Link from "next/link";
+import { File, ListFilter, MoreHorizontal, PlusCircle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
     Card,
     CardContent,
@@ -18,7 +14,7 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
@@ -27,8 +23,8 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
     Table,
     TableBody,
@@ -36,13 +32,13 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 import {
     Tabs,
     TabsContent,
     TabsList,
     TabsTrigger,
-} from "@/components/ui/tabs"
+} from "@/components/ui/tabs";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -53,25 +49,48 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
     AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
 
-import formateDate from '@/utils/formateDate';
+import formateDate from "@/utils/formateDate";
+import { fetchCourses } from "@/utils/course"; // Import the fetchCourses utility
 
-async function getCourses() {
-    try {
-        const Response = await fetch(process.env.BASE_URL + "/api/products/", {
-            method: "GET",
-            cache: 'no-cache'
-        });
-        return Response.json();
-    } catch (error) {
-        console.error("error occured while fetching courses: " + error);
+export default function Courses() {
+    const [courses, setCourses] = useState([]);
+    const [loading, setLoading] = useState(true); // For loading state
+    const [error, setError] = useState(null); // For error state
+
+    useEffect(() => {
+        const loadCourses = async () => {
+            try {
+                const data = await fetchCourses(); // Using the fetchCourses function
+                setCourses(data);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error occurred while fetching courses:", error);
+                setError(error.message);
+                setLoading(false);
+            }
+        };
+
+        loadCourses();
+    }, []);
+
+    if (loading) {
+        return (
+            <div className="grid flex-1 items-center justify-center">
+                {/* Add your skeleton loader here */}
+                <div>Loading...</div>
+            </div>
+        );
     }
-}
 
-
-export default async function Courses() {
-    const courses = await getCourses();
+    if (error) {
+        return (
+            <div className="grid flex-1 items-center justify-center">
+                <div>Error: {error}</div>
+            </div>
+        );
+    }
 
     return (
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
@@ -98,13 +117,9 @@ export default async function Courses() {
                             <DropdownMenuContent align="end">
                                 <DropdownMenuLabel>Filter by</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuCheckboxItem checked>
-                                    Active
-                                </DropdownMenuCheckboxItem>
+                                <DropdownMenuCheckboxItem checked>Active</DropdownMenuCheckboxItem>
                                 <DropdownMenuCheckboxItem>Draft</DropdownMenuCheckboxItem>
-                                <DropdownMenuCheckboxItem>
-                                    Archived
-                                </DropdownMenuCheckboxItem>
+                                <DropdownMenuCheckboxItem>Archived</DropdownMenuCheckboxItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
                         <Button size="sm" variant="outline" className="h-8 gap-1">
@@ -116,9 +131,7 @@ export default async function Courses() {
                         <Button size="sm" className="h-8 gap-1">
                             <PlusCircle className="h-3.5 w-3.5" />
                             <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                                <Link href="courses/addcourse">
-                                    Add Course
-                                </Link>
+                                <Link href="courses/addcourse">Add Course</Link>
                             </span>
                         </Button>
                     </div>
@@ -140,101 +153,81 @@ export default async function Courses() {
                                         </TableHead>
                                         <TableHead>Name</TableHead>
                                         <TableHead>Status</TableHead>
-                                        <TableHead className="hidden md:table-cell">
-                                            Price
-                                        </TableHead>
-                                        <TableHead className="hidden md:table-cell">
-                                            Total Sales
-                                        </TableHead>
-                                        <TableHead className="hidden md:table-cell">
-                                            Created at
-                                        </TableHead>
+                                        <TableHead className="hidden md:table-cell">Price</TableHead>
+                                        <TableHead className="hidden md:table-cell">Total Sales</TableHead>
+                                        <TableHead className="hidden md:table-cell">Created at</TableHead>
                                         <TableHead>
                                             <span className="sr-only">Actions</span>
                                         </TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    {courses.map((course) => {
-                                        return (
-                                            < TableRow key={uuidv4()} >
-                                                <TableCell className="hidden sm:table-cell">
-                                                    <Image
-                                                        alt="Product image"
-                                                        className="aspect-square rounded-md object-cover"
-                                                        height="64"
-                                                        src="/placeholder.svg"
-                                                        width="64"
-                                                    />
-                                                </TableCell>
-                                                <TableCell className="font-medium">
-                                                    {course.name}
-                                                </TableCell>
-                                                <TableCell>
-                                                    <Badge variant="outline">Draft</Badge>
-                                                </TableCell>
-                                                <TableCell className="hidden md:table-cell">
-                                                    {"₹" + course.price}
-                                                </TableCell>
-                                                <TableCell className="hidden md:table-cell">
-                                                    25
-                                                </TableCell>
-                                                <TableCell className="hidden md:table-cell">
-                                                    {formateDate(course.createdAt)}
-                                                </TableCell>
-                                                <TableCell>
-                                                    <DropdownMenu>
-                                                        <DropdownMenuTrigger asChild>
-                                                            <Button
-                                                                aria-haspopup="true"
-                                                                size="icon"
-                                                                variant="ghost"
-                                                            >
-                                                                <MoreHorizontal className="h-4 w-4" />
-                                                                <span className="sr-only">Toggle menu</span>
-                                                            </Button>
-                                                        </DropdownMenuTrigger>
-                                                        <DropdownMenuContent align="end">
-                                                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                                            <Link href="courses/editcourse">
-                                                                <DropdownMenuItem>Edit</DropdownMenuItem>
-                                                            </Link>
-                                                            <AlertDialog>
-                                                                <AlertDialogTrigger asChild>
-                                                                    <DropdownMenuItem>Delete</DropdownMenuItem>
-                                                                </AlertDialogTrigger>
-                                                                <AlertDialogContent>
-                                                                    <AlertDialogHeader>
-                                                                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                                                                        <AlertDialogDescription>
-                                                                            This action cannot be undone. This will permanently delete
-                                                                            this course and remove your data from our servers.
-                                                                        </AlertDialogDescription>
-                                                                    </AlertDialogHeader>
-                                                                    <AlertDialogFooter>
-                                                                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                                                        <AlertDialogAction>Delete</AlertDialogAction>
-                                                                    </AlertDialogFooter>
-                                                                </AlertDialogContent>
-                                                            </AlertDialog>
-                                                        </DropdownMenuContent>
-                                                    </DropdownMenu>
-                                                </TableCell>
-                                            </TableRow>
-                                        )
-                                    })}
+                                    {courses.map((course) => (
+                                        <TableRow key={uuidv4()}>
+                                            <TableCell className="hidden sm:table-cell">
+                                                <Image
+                                                    alt="Product image"
+                                                    className="aspect-square rounded-md object-cover"
+                                                    height="64"
+                                                    src="/placeholder.svg"
+                                                    width="64"
+                                                />
+                                            </TableCell>
+                                            <TableCell className="font-medium">{course.name}</TableCell>
+                                            <TableCell>
+                                                <Badge variant="outline">Draft</Badge>
+                                            </TableCell>
+                                            <TableCell className="hidden md:table-cell">{"₹" + course.price}</TableCell>
+                                            <TableCell className="hidden md:table-cell">25</TableCell>
+                                            <TableCell className="hidden md:table-cell">{formateDate(course.createdAt)}</TableCell>
+                                            <TableCell>
+                                                <DropdownMenu>
+                                                    <DropdownMenuTrigger asChild>
+                                                        <Button aria-haspopup="true" size="icon" variant="ghost">
+                                                            <MoreHorizontal className="h-4 w-4" />
+                                                            <span className="sr-only">Toggle menu</span>
+                                                        </Button>
+                                                    </DropdownMenuTrigger>
+                                                    <DropdownMenuContent align="end">
+                                                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                                                        <Link href="courses/editcourse">
+                                                            <DropdownMenuItem>Edit</DropdownMenuItem>
+                                                        </Link>
+                                                        <AlertDialog>
+                                                            <AlertDialogTrigger asChild>
+                                                                <DropdownMenuItem>Delete</DropdownMenuItem>
+                                                            </AlertDialogTrigger>
+                                                            <AlertDialogContent>
+                                                                <AlertDialogHeader>
+                                                                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                                                    <AlertDialogDescription>
+                                                                        This action cannot be undone. This will permanently delete
+                                                                        this course and remove your data from our servers.
+                                                                    </AlertDialogDescription>
+                                                                </AlertDialogHeader>
+                                                                <AlertDialogFooter>
+                                                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                                                    <AlertDialogAction>Delete</AlertDialogAction>
+                                                                </AlertDialogFooter>
+                                                            </AlertDialogContent>
+                                                        </AlertDialog>
+                                                    </DropdownMenuContent>
+                                                </DropdownMenu>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
                                 </TableBody>
                             </Table>
                         </CardContent>
                         <CardFooter>
-                            <div className="text-xs text-muted-foreground">
-                                Showing <strong>1-{courses.length}</strong> of <strong>{courses.length}</strong>{" "}
-                                courses
-                            </div>
+                            {/* <div className="text-xs text-muted-foreground">
+                Showing <strong>1-{courses.length}</strong> of <strong>{courses.length}</strong>{" "}
+                courses
+              </div> */}
                         </CardFooter>
                     </Card>
                 </TabsContent>
             </Tabs>
-        </main >
-    )
+        </main>
+    );
 }

@@ -1,10 +1,30 @@
+"use client"
+
 import Image from "next/image";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import verifySession from "@/utils/verifySession";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const isAuthenticated = verifySession();
+
+    if (isAuthenticated) {
+      router.replace("/dashboard"); // Redirect to dashboard if authenticated
+    } else {
+      router.replace("/login"); // Redirect to login if not authenticated
+    }
+  }, [router]);
+
+  //   return null
+  // }
+
   return (
     <>
       <Header />

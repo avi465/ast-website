@@ -13,15 +13,6 @@ import {
     ShoppingCart,
     Users2,
 } from "lucide-react"
-
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
 import { Button } from "@/components/ui/button"
 import {
     DropdownMenu,
@@ -40,10 +31,28 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { TooltipProvider } from "@radix-ui/react-tooltip"
+import {
+    Avatar,
+    AvatarFallback,
+    AvatarImage,
+} from "@/components/ui/avatar"
 import logout from "@/utils/logout"
+import { useRouter } from 'next/navigation'
+import DynamicBreadcrumb from "@/components/dashboard/breadcrumb"
 
 
 export default function DashboardLayout({ children }) {
+    const router = useRouter();
+
+    const handleLogout = async () => {
+        const success = await logout();
+        if (success) {
+            router.replace('/login'); // Redirect to login on success
+        } else {
+            console.error("Logout failed");
+        }
+    };
+
     return (
         <div className="flex min-h-screen w-full flex-col bg-muted/40">
             <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -192,25 +201,9 @@ export default function DashboardLayout({ children }) {
                             </nav>
                         </SheetContent>
                     </Sheet>
-                    <Breadcrumb className="hidden md:flex">
-                        <BreadcrumbList>
-                            <BreadcrumbItem>
-                                <BreadcrumbLink asChild>
-                                    <Link href="/dashboard">Dashboard</Link>
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                                <BreadcrumbLink asChild>
-                                    <Link href="/dashboard/orders">Orders</Link>
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                                <BreadcrumbPage>Recent Orders</BreadcrumbPage>
-                            </BreadcrumbItem>
-                        </BreadcrumbList>
-                    </Breadcrumb>
+
+                    {/* dynamically show breadcrumb on the basic of route */}
+                    <DynamicBreadcrumb />
                     <div className="relative ml-auto flex-1 md:grow-0">
                         <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                         <Input
@@ -226,13 +219,11 @@ export default function DashboardLayout({ children }) {
                                 size="icon"
                                 className="overflow-hidden rounded-full"
                             >
-                                <Image
-                                    src="/avtar.png"
-                                    width={36}
-                                    height={36}
-                                    alt="Avatar"
-                                    className="overflow-hidden rounded-full"
-                                />
+                                <Avatar className="hidden h-9 w-9 sm:flex">
+                                    <AvatarImage src="/avatars/01.png" alt="Avatar" />
+                                    {/* todo: show dynamic according to user logged in */}
+                                    <AvatarFallback>OM</AvatarFallback>
+                                </Avatar>
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
@@ -241,7 +232,7 @@ export default function DashboardLayout({ children }) {
                             <DropdownMenuItem>Settings</DropdownMenuItem>
                             <DropdownMenuItem>Support</DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>Logout</DropdownMenuItem>
+                            <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </header>

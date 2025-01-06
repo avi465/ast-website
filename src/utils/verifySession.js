@@ -1,18 +1,18 @@
-export default async function verifySession() {
+export default async function verifySession(req) {
     try {
-        const Response = await fetch(process.env.BASE_URL + "/api/admin/verify-session", {
+        const response = await fetch(`${process.env.BASE_URL}/api/admin/verify-session`, {
             method: "GET",
-            cache: "no-store"
+            cache: "no-store",
+            credentials: "include", // Ensure cookies are sent with the request
         });
-        if (Response.status == 200) {
+
+        if (response.status === 200) {
             return true;
         } else {
             return false;
         }
     } catch (error) {
-        console.error("error occured while verifying session: " + error);
+        console.error("Error occurred while verifying session:", error);
+        return false;
     }
 }
-
-export let isLoggedIn = verifySession();
-console.log(isLoggedIn);

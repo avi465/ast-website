@@ -16,6 +16,12 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { useState } from "react"
 import { useRouter } from 'next/navigation'
+import { login } from "@/utils/login"
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 
 export default function loginForm() {
@@ -23,31 +29,63 @@ export default function loginForm() {
     const [password, setPassword] = useState("");
     const router = useRouter()
 
-    const uri = "http://localhost:3000/api/admin/login"
+    // const handleLogin = async () => {
+    //     const success = await login(email, password);
+    //     if (success) {
+    //         console.log("log in success")
+    //         router.replace("/dashboard")
+    //     } else {
+    //         console.log("something went wrong while login")
+    //     }
+    // };
 
-    async function login() {
-        const data = {
-            email: email,
-            password: password
-        }
+    // Define mutation
+    const { mutate, isPending, isError, error, isSuccess } = useMutation({
+        mutationFn: login,
+        onSuccess: () => {
+            NProgress.done();
+            // Redirect to dashboard on success
+            router.replace("/dashboard");
+        },
+    });
 
-        try {
-            const Response = await fetch(uri, {
-                method: "POST",
-                cache: "default",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-            if (Response.status == 200) {
-                // Handle successful login here (e.g., store token, redirect, etc.)
-                router.replace('/dashboard');
-            }
-        } catch (error) {
-            console.error("error occured while fetching courses: " + error);
-        }
+    const handleLogin = () => {
+        mutate({ email, password }); // Trigger mutation
+    };
+
+    if (isPending) {
+        console.log(mutate)
+        NProgress.start();
     }
+
+    // useEffect(() => {
+    //     const handleStart = () => {
+    //         NProgress.start();
+    //         // Simulate a delay to show the loading bar (useful for demo purposes)
+    //         setTimeout(() => {
+    //             NProgress.done();
+    //         }, 2000); // 2-second simulated delay
+    //     };
+
+    //     const handleComplete = () => {
+    //         NProgress.done();
+    //     };
+
+    //     const handleError = () => {
+    //         NProgress.done();
+    //     };
+
+    //     router.events.on("routeChangeStart", handleStart);
+    //     router.events.on("routeChangeComplete", handleComplete);
+    //     router.events.on("routeChangeError", handleError);
+
+    //     return () => {
+    //         router.events.off("routeChangeStart", handleStart);
+    //         router.events.off("routeChangeComplete", handleComplete);
+    //         router.events.off("routeChangeError", handleError);
+    //     };
+    // }, []);
+
 
     return (
         <>
@@ -88,7 +126,7 @@ export default function loginForm() {
                                     required
                                 />
                             </div>
-                            <Button type="submit" className="w-full" onClick={login}>
+                            <Button type="submit" className="w-full" onClick={handleLogin}>
                                 Login
                             </Button>
                             <Button variant="outline" className="w-full">
