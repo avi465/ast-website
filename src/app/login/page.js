@@ -22,6 +22,7 @@ import "nprogress/nprogress.css";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from 'sonner'
 
 
 export default function loginForm() {
@@ -29,24 +30,19 @@ export default function loginForm() {
     const [password, setPassword] = useState("");
     const router = useRouter()
 
-    // const handleLogin = async () => {
-    //     const success = await login(email, password);
-    //     if (success) {
-    //         console.log("log in success")
-    //         router.replace("/dashboard")
-    //     } else {
-    //         console.log("something went wrong while login")
-    //     }
-    // };
-
     // Define mutation
     const { mutate, isPending, isError, error, isSuccess } = useMutation({
         mutationFn: login,
         onSuccess: () => {
             NProgress.done();
+            toast.success("Login successful!");
             // Redirect to dashboard on success
             router.replace("/dashboard");
         },
+        onError: (error) => {
+            NProgress.done();
+            toast.error("Login failed: " + error.message);
+        }
     });
 
     const handleLogin = () => {
@@ -54,38 +50,8 @@ export default function loginForm() {
     };
 
     if (isPending) {
-        console.log(mutate)
         NProgress.start();
     }
-
-    // useEffect(() => {
-    //     const handleStart = () => {
-    //         NProgress.start();
-    //         // Simulate a delay to show the loading bar (useful for demo purposes)
-    //         setTimeout(() => {
-    //             NProgress.done();
-    //         }, 2000); // 2-second simulated delay
-    //     };
-
-    //     const handleComplete = () => {
-    //         NProgress.done();
-    //     };
-
-    //     const handleError = () => {
-    //         NProgress.done();
-    //     };
-
-    //     router.events.on("routeChangeStart", handleStart);
-    //     router.events.on("routeChangeComplete", handleComplete);
-    //     router.events.on("routeChangeError", handleError);
-
-    //     return () => {
-    //         router.events.off("routeChangeStart", handleStart);
-    //         router.events.off("routeChangeComplete", handleComplete);
-    //         router.events.off("routeChangeError", handleError);
-    //     };
-    // }, []);
-
 
     return (
         <>
@@ -109,6 +75,7 @@ export default function loginForm() {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
+                                    disabled={isPending}
                                 />
                             </div>
                             <div className="grid gap-2">
@@ -124,12 +91,22 @@ export default function loginForm() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
+                                    disabled={isPending}
                                 />
                             </div>
-                            <Button type="submit" className="w-full" onClick={handleLogin}>
-                                Login
+                            <Button
+                                type="submit"
+                                className="w-full"
+                                onClick={handleLogin}
+                                disabled={isPending}
+                            >
+                                {isPending ? "Logging in..." : "Login"}
                             </Button>
-                            <Button variant="outline" className="w-full">
+                            <Button
+                                variant="outline"
+                                className="w-full"
+                                disabled={isPending}
+                            >
                                 Login with Google
                             </Button>
                         </div>
