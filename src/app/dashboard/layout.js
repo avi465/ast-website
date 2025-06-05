@@ -37,12 +37,13 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 import logout from "@/utils/logout"
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import DynamicBreadcrumb from "@/components/dashboard/breadcrumb"
 
 
 export default function DashboardLayout({ children }) {
     const router = useRouter();
+    const pathname = usePathname();
 
     const handleLogout = async () => {
         const success = await logout();
@@ -52,6 +53,9 @@ export default function DashboardLayout({ children }) {
             console.error("Logout failed");
         }
     };
+
+    // Helper to check if route is active
+    const isActive = (route) => pathname === route;
 
     return (
         <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -70,7 +74,9 @@ export default function DashboardLayout({ children }) {
                             <TooltipTrigger asChild>
                                 <Link
                                     href="/dashboard"
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8
+                                        ${isActive("/dashboard") ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground"}
+                                    `}
                                 >
                                     <Home className="h-5 w-5" />
                                     <span className="sr-only">Dashboard</span>
@@ -82,7 +88,9 @@ export default function DashboardLayout({ children }) {
                             <TooltipTrigger asChild>
                                 <Link
                                     href="/dashboard/orders"
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8
+                                        ${isActive("/dashboard/orders") ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground"}
+                                    `}
                                 >
                                     <ShoppingCart className="h-5 w-5" />
                                     <span className="sr-only">Orders</span>
@@ -94,7 +102,9 @@ export default function DashboardLayout({ children }) {
                             <TooltipTrigger asChild>
                                 <Link
                                     href="/dashboard/courses"
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8
+                                        ${isActive("/dashboard/courses") ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground"}
+                                    `}
                                 >
                                     <Package className="h-5 w-5" />
                                     <span className="sr-only">Courses</span>
@@ -106,7 +116,9 @@ export default function DashboardLayout({ children }) {
                             <TooltipTrigger asChild>
                                 <Link
                                     href="/dashboard/customers"
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8
+                                        ${isActive("/dashboard/customers") ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground"}
+                                    `}
                                 >
                                     <Users2 className="h-5 w-5" />
                                     <span className="sr-only">Customers</span>
@@ -118,7 +130,9 @@ export default function DashboardLayout({ children }) {
                             <TooltipTrigger asChild>
                                 <Link
                                     href="/dashboard/analytics"
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8
+                                        ${isActive("/dashboard/analytics") ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground"}
+                                    `}
                                 >
                                     <LineChart className="h-5 w-5" />
                                     <span className="sr-only">Analytics</span>

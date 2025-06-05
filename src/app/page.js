@@ -7,17 +7,21 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import verifySession from "@/utils/verifySession";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export default function Home() {
   const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const isAuthenticated = verifySession();
+    setIsAuthenticated(verifySession());
 
     if (isAuthenticated) {
+      toast.success("You are logged in. Redirecting to dashboard...");
       router.replace("/dashboard"); // Redirect to dashboard if authenticated
     } else {
+      toast.info("You are not logged in. Please log in to access the dashboard.");
       router.replace("/login"); // Redirect to login if not authenticated
     }
   }, [router]);
@@ -37,7 +41,7 @@ export default function Home() {
           </p>
         </div>
 
-        <Button asChild><a href="/dashboard">Go to Dashboard</a></Button>
+        <Button asChild><Link href="/dashboard">Go to Dashboard</Link></Button>
 
         <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
           <a

@@ -33,7 +33,7 @@ export default function loginForm() {
     // Define mutation
     const { mutate, isPending, isError, error, isSuccess } = useMutation({
         mutationFn: login,
-        onSuccess: () => {
+        onSuccess: (res) => {
             NProgress.done();
             toast.success("Login successful!");
             // Redirect to dashboard on success
