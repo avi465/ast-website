@@ -3,11 +3,6 @@ import { CircleCheck, Loader, EllipsisVertical } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { DataTableColumnHeader } from "../../../../../components/data-table/data-table-column-header";
-
-import { sectionSchema } from "./schema";
-import { TableCellViewer } from "./table-cell-viewer";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -22,13 +17,20 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+import { DataTableColumnHeader } from "../../../../../components/data-table/data-table-column-header";
+
+import { sectionSchema } from "./schema";
+import { TableCellViewer } from "./table-cell-viewer";
+
 export const dashboardColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
   {
     id: "select",
     header: ({ table }) => (
       <div className="flex items-center justify-center">
         <Checkbox
-          checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
+          checked={
+            table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? "indeterminate" : false
+          }
           onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
           aria-label="Select all"
         />
