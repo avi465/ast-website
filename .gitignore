@@ -16,9 +16,14 @@
 # production
 /build
 
+# /development
+/.idea
+/.vscode
+
 # misc
 .DS_Store
 *.pem
+*.sh
 
 # debug
 npm-debug.log*

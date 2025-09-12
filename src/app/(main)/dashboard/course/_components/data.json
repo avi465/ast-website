@@ -1,0 +1,614 @@
+[
+  {
+    "id": "1",
+    "name": "Cover page",
+    "language": "Cover page",
+    "status": "In Process",
+    "price": 18,
+    "discount": 5,
+    "updatedAt": "Eddie Lake"
+  },
+  {
+    "id": "2",
+    "name": "Table of contents",
+    "language": "Table of contents",
+    "status": "Done",
+    "price": 29,
+    "discount": 24,
+    "updatedAt": "Eddie Lake"
+  },
+  {
+    "id": "3",
+    "name": "Executive summary",
+    "language": "Narrative",
+    "status": "Done",
+    "price": 10,
+    "discount": 13,
+    "updatedAt": "Eddie Lake"
+  },
+  {
+    "id": "4",
+    "name": "Technical approach",
+    "language": "Narrative",
+    "status": "Done",
+    "price": 27,
+    "discount": 23,
+    "updatedAt": "Jamik Tashpulatov"
+  },
+  {
+    "id": "5",
+    "name": "Design",
+    "language": "Narrative",
+    "status": "In Process",
+    "price": 2,
+    "discount": 16,
+    "updatedAt": "Jamik Tashpulatov"
+  },
+  {
+    "id": "6",
+    "name": "Capabilities",
+    "language": "Narrative",
+    "status": "In Process",
+    "price": 20,
+    "discount": 8,
+    "updatedAt": "Jamik Tashpulatov"
+  },
+  {
+    "id": "7",
+    "name": "Integration with existing systems",
+    "language": "Narrative",
+    "status": "In Process",
+    "price": 19,
+    "discount": 21,
+    "updatedAt": "Jamik Tashpulatov"
+  },
+  {
+    "id": "8",
+    "name": "Innovation and Advantages",
+    "language": "Narrative",
+    "status": "Done",
+    "price": 25,
+    "discount": 26,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "9",
+    "name": "Overview of EMR's Innovative Solutions",
+    "language": "Technical content",
+    "status": "Done",
+    "price": 7,
+    "discount": 23,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "10",
+    "name": "Advanced Algorithms and Machine Learning",
+    "language": "Narrative",
+    "status": "Done",
+    "price": 30,
+    "discount": 28,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "11",
+    "name": "Adaptive Communication Protocols",
+    "language": "Narrative",
+    "status": "Done",
+    "price": 9,
+    "discount": 31,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "12",
+    "name": "Advantages Over Current Technologies",
+    "language": "Narrative",
+    "status": "Done",
+    "price": 12,
+    "discount": 0,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "13",
+    "name": "Past Performance",
+    "language": "Narrative",
+    "status": "Done",
+    "price": 22,
+    "discount": 33,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "14",
+    "name": "Customer Feedback and Satisfaction Levels",
+    "language": "Narrative",
+    "status": "Done",
+    "price": 15,
+    "discount": 34,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "15",
+    "name": "Implementation Challenges and Solutions",
+    "language": "Narrative",
+    "status": "Done",
+    "price": 3,
+    "discount": 35,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "16",
+    "name": "Security Measures and Data Protection Policies",
+    "language": "Narrative",
+    "status": "In Process",
+    "price": 6,
+    "discount": 36,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "17",
+    "name": "Scalability and Future Proofing",
+    "language": "Narrative",
+    "status": "Done",
+    "price": 4,
+    "discount": 37,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "18",
+    "name": "Cost-Benefit Analysis",
+    "language": "Plain language",
+    "status": "Done",
+    "price": 14,
+    "discount": 38,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "19",
+    "name": "User Training and Onboarding Experience",
+    "language": "Narrative",
+    "status": "Done",
+    "price": 17,
+    "discount": 39,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "20",
+    "name": "Future Development Roadmap",
+    "language": "Narrative",
+    "status": "Done",
+    "price": 11,
+    "discount": 40,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "21",
+    "name": "System Architecture Overview",
+    "language": "Technical content",
+    "status": "In Process",
+    "price": 24,
+    "discount": 18,
+    "updatedAt": "Maya Johnson"
+  },
+  {
+    "id": "22",
+    "name": "Risk Management Plan",
+    "language": "Narrative",
+    "status": "Done",
+    "price": 15,
+    "discount": 22,
+    "updatedAt": "Carlos Rodriguez"
+  },
+  {
+    "id": "23",
+    "name": "Compliance Documentation",
+    "language": "Legal",
+    "status": "In Process",
+    "price": 31,
+    "discount": 27,
+    "updatedAt": "Sarah Chen"
+  },
+  {
+    "id": "24",
+    "name": "API Documentation",
+    "language": "Technical content",
+    "status": "Done",
+    "price": 8,
+    "discount": 12,
+    "updatedAt": "Raj Patel"
+  },
+  {
+    "id": "25",
+    "name": "User Interface Mockups",
+    "language": "Visual",
+    "status": "In Process",
+    "price": 19,
+    "discount": 25,
+    "updatedAt": "Leila Ahmadi"
+  },
+  {
+    "id": "26",
+    "name": "Database Schema",
+    "language": "Technical content",
+    "status": "Done",
+    "price": 22,
+    "discount": 20,
+    "updatedAt": "Thomas Wilson"
+  },
+  {
+    "id": "27",
+    "name": "Testing Methodology",
+    "language": "Technical content",
+    "status": "In Process",
+    "price": 17,
+    "discount": 14,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "28",
+    "name": "Deployment Strategy",
+    "language": "Narrative",
+    "status": "Done",
+    "price": 26,
+    "discount": 30,
+    "updatedAt": "Eddie Lake"
+  },
+  {
+    "id": "29",
+    "name": "Budget Breakdown",
+    "language": "Financial",
+    "status": "In Process",
+    "price": 13,
+    "discount": 16,
+    "updatedAt": "Jamik Tashpulatov"
+  },
+  {
+    "id": "30",
+    "name": "Market Analysis",
+    "language": "Research",
+    "status": "Done",
+    "price": 29,
+    "discount": 32,
+    "updatedAt": "Sophia Martinez"
+  },
+  {
+    "id": "31",
+    "name": "Competitor Comparison",
+    "language": "Research",
+    "status": "In Process",
+    "price": 21,
+    "discount": 19,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "32",
+    "name": "Maintenance Plan",
+    "language": "Technical content",
+    "status": "Done",
+    "price": 16,
+    "discount": 23,
+    "updatedAt": "Alex Thompson"
+  },
+  {
+    "id": "33",
+    "name": "User Personas",
+    "language": "Research",
+    "status": "In Process",
+    "price": 27,
+    "discount": 24,
+    "updatedAt": "Nina Patel"
+  },
+  {
+    "id": "34",
+    "name": "Accessibility Compliance",
+    "language": "Legal",
+    "status": "Done",
+    "price": 18,
+    "discount": 21,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "35",
+    "name": "Performance Metrics",
+    "language": "Technical content",
+    "status": "In Process",
+    "price": 23,
+    "discount": 26,
+    "updatedAt": "David Ki"
+  },
+  {
+    "id": "36",
+    "name": "Disaster Recovery Plan",
+    "language": "Technical content",
+    "status": "Done",
+    "price": 14,
+    "discount": 17,
+    "updatedAt": "Jamik Tashpulatov"
+  },
+  {
+    "id": "37",
+    "name": "Third-party Integrations",
+    "language": "Technical content",
+    "status": "In Process",
+    "price": 25,
+    "discount": 28,
+    "updatedAt": "Eddie Lake"
+  },
+  {
+    "id": "38",
+    "name": "User Feedback Summary",
+    "language": "Research",
+    "status": "Done",
+    "price": 20,
+    "discount": 15,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "39",
+    "name": "Localization Strategy",
+    "language": "Narrative",
+    "status": "In Process",
+    "price": 12,
+    "discount": 19,
+    "updatedAt": "Maria Garcia"
+  },
+  {
+    "id": "40",
+    "name": "Mobile Compatibility",
+    "language": "Technical content",
+    "status": "Done",
+    "price": 28,
+    "discount": 31,
+    "updatedAt": "James Wilson"
+  },
+  {
+    "id": "41",
+    "name": "Data Migration Plan",
+    "language": "Technical content",
+    "status": "In Process",
+    "price": 19,
+    "discount": 22,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "42",
+    "name": "Quality Assurance Protocols",
+    "language": "Technical content",
+    "status": "Done",
+    "price": 30,
+    "discount": 33,
+    "updatedAt": "Priya Singh"
+  },
+  {
+    "id": "43",
+    "name": "Stakeholder Analysis",
+    "language": "Research",
+    "status": "In Process",
+    "price": 11,
+    "discount": 14,
+    "updatedAt": "Eddie Lake"
+  },
+  {
+    "id": "44",
+    "name": "Environmental Impact Assessment",
+    "language": "Research",
+    "status": "Done",
+    "price": 24,
+    "discount": 27,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "45",
+    "name": "Intellectual Property Rights",
+    "language": "Legal",
+    "status": "In Process",
+    "price": 17,
+    "discount": 20,
+    "updatedAt": "Sarah Johnson"
+  },
+  {
+    "id": "46",
+    "name": "Customer Support Framework",
+    "language": "Narrative",
+    "status": "Done",
+    "price": 22,
+    "discount": 25,
+    "updatedAt": "Jamik Tashpulatov"
+  },
+  {
+    "id": "47",
+    "name": "Version Control Strategy",
+    "language": "Technical content",
+    "status": "In Process",
+    "price": 15,
+    "discount": 18,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "48",
+    "name": "Continuous Integration Pipeline",
+    "language": "Technical content",
+    "status": "Done",
+    "price": 26,
+    "discount": 29,
+    "updatedAt": "Michael Chen"
+  },
+  {
+    "id": "49",
+    "name": "Regulatory Compliance",
+    "language": "Legal",
+    "status": "In Process",
+    "price": 13,
+    "discount": 16,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "50",
+    "name": "User Authentication System",
+    "language": "Technical content",
+    "status": "Done",
+    "price": 28,
+    "discount": 31,
+    "updatedAt": "Eddie Lake"
+  },
+  {
+    "id": "51",
+    "name": "Data Analytics Framework",
+    "language": "Technical content",
+    "status": "In Process",
+    "price": 21,
+    "discount": 24,
+    "updatedAt": "Jamik Tashpulatov"
+  },
+  {
+    "id": "52",
+    "name": "Cloud Infrastructure",
+    "language": "Technical content",
+    "status": "Done",
+    "price": 16,
+    "discount": 19,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "53",
+    "name": "Network Security Measures",
+    "language": "Technical content",
+    "status": "In Process",
+    "price": 29,
+    "discount": 32,
+    "updatedAt": "Lisa Wong"
+  },
+  {
+    "id": "54",
+    "name": "Project Timeline",
+    "language": "Planning",
+    "status": "Done",
+    "price": 14,
+    "discount": 17,
+    "updatedAt": "Eddie Lake"
+  },
+  {
+    "id": "55",
+    "name": "Resource Allocation",
+    "language": "Planning",
+    "status": "In Process",
+    "price": 27,
+    "discount": 30,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "56",
+    "name": "Team Structure and Roles",
+    "language": "Planning",
+    "status": "Done",
+    "price": 20,
+    "discount": 23,
+    "updatedAt": "Jamik Tashpulatov"
+  },
+  {
+    "id": "57",
+    "name": "Communication Protocols",
+    "language": "Planning",
+    "status": "In Process",
+    "price": 15,
+    "discount": 18,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "58",
+    "name": "Success Metrics",
+    "language": "Planning",
+    "status": "Done",
+    "price": 30,
+    "discount": 33,
+    "updatedAt": "Eddie Lake"
+  },
+  {
+    "id": "59",
+    "name": "Internationalization Support",
+    "language": "Technical content",
+    "status": "In Process",
+    "price": 23,
+    "discount": 26,
+    "updatedAt": "Jamik Tashpulatov"
+  },
+  {
+    "id": "60",
+    "name": "Backup and Recovery Procedures",
+    "language": "Technical content",
+    "status": "Done",
+    "price": 18,
+    "discount": 21,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "61",
+    "name": "Monitoring and Alerting System",
+    "language": "Technical content",
+    "status": "In Process",
+    "price": 25,
+    "discount": 28,
+    "updatedAt": "Daniel Park"
+  },
+  {
+    "id": "62",
+    "name": "Code Review Guidelis",
+    "language": "Technical content",
+    "status": "Done",
+    "price": 12,
+    "discount": 15,
+    "updatedAt": "Eddie Lake"
+  },
+  {
+    "id": "63",
+    "name": "Documentation Standards",
+    "language": "Technical content",
+    "status": "In Process",
+    "price": 27,
+    "discount": 30,
+    "updatedAt": "Jamik Tashpulatov"
+  },
+  {
+    "id": "64",
+    "name": "Release Management Process",
+    "language": "Planning",
+    "status": "Done",
+    "price": 22,
+    "discount": 25,
+    "updatedAt": "Assign reviewer"
+  },
+  {
+    "id": "65",
+    "name": "Feature Prioritization Matrix",
+    "language": "Planning",
+    "status": "In Process",
+    "price": 19,
+    "discount": 22,
+    "updatedAt": "Emma Davis"
+  },
+  {
+    "id": "66",
+    "name": "Technical Debt Assessment",
+    "language": "Technical content",
+    "status": "Done",
+    "price": 24,
+    "discount": 27,
+    "updatedAt": "Eddie Lake"
+  },
+  {
+    "id": "67",
+    "name": "Capacity Planning",
+    "language": "Planning",
+    "status": "In Process",
+    "price": 21,
+    "discount": 24,
+    "updatedAt": "Jamik Tashpulatov"
+  },
+  {
+    "id": "68",
+    "name": "Service Level Agreements",
+    "language": "Legal",
+    "status": "Done",
+    "price": 26,
+    "discount": 29,
+    "updatedAt": "Assign reviewer"
+  }
+]
