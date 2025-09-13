@@ -15,9 +15,9 @@ import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { SortableContext, verticalListSortingStrategy, arrayMove } from "@dnd-kit/sortable";
 import { ColumnDef, flexRender, type Table as TanStackTable } from "@tanstack/react-table";
 
-import { DraggableRow } from "./draggable-row";
-
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+
+import { DraggableRow } from "./draggable-row";
 
 interface DataTableProps<TData, TValue> {
   table: TanStackTable<TData>;

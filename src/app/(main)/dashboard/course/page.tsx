@@ -8,10 +8,10 @@ import { QueryClient, useQuery, useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { map } from "zod";
 
+import { Course, fetchCourses } from "@/service/course-service";
+
 import { DataTable } from "./_components/data-table";
 import data from "./_components/data.json";
-
-import { Course, fetchCourses } from "@/service/course-service";
 
 export default function Page() {
   const response = useQuery<Course[]>({

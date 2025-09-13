@@ -5,9 +5,6 @@ import * as React from "react";
 import { Plus } from "lucide-react";
 import { z } from "zod";
 
-import { dashboardColumns } from "./columns";
-import { sectionSchema } from "./schema";
-
 import { DataTable as DataTableNew } from "@/components/data-table/data-table";
 import { DataTablePagination } from "@/components/data-table/data-table-pagination";
 import { DataTableViewOptions } from "@/components/data-table/data-table-view-options";
@@ -16,6 +13,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardAction } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useDataTableInstance } from "@/hooks/use-data-table-instance";
+
+import { dashboardColumns } from "./columns";
+import { sectionSchema } from "./schema";
 
 export function DataTable({ data: initialData }: { data: z.infer<typeof sectionSchema>[] }) {
   const [data, setData] = React.useState(() => initialData);

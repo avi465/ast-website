@@ -2,9 +2,9 @@
 
 import { QueryClient, useQuery, useMutation } from "@tanstack/react-query";
 
-import { TableCards } from "./_components/table-cards";
-
 import { Lesson, fetchAllLesson } from "@/service/lesson-service";
+
+import { TableCards } from "./_components/table-cards";
 
 export default function Page() {
   const response = useQuery<Lesson[]>({

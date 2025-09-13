@@ -2,13 +2,13 @@ import { ColumnDef } from "@tanstack/react-table";
 import { EllipsisVertical } from "lucide-react";
 import z from "zod";
 
-import { lessonSchema } from "./schema";
-
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { timeAgo } from "@/utils/formate-date";
+
+import { lessonSchema } from "./schema";
 
 export const recentLeadsColumns: ColumnDef<z.infer<typeof lessonSchema>>[] = [
   {

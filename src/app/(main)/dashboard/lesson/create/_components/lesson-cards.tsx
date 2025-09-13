@@ -9,8 +9,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { DateTimePicker } from "./date-time-picker";
-
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardAction } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -19,6 +17,8 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { createLesson, Lesson } from "@/service/lesson-service";
 import { createStream } from "@/service/stream-service";
+
+import { DateTimePicker } from "./date-time-picker";
 
 const lessonSchema = z
   .object({
