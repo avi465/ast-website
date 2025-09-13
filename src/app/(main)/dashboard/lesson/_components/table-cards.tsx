@@ -7,10 +7,6 @@ import { useRouter } from "next/navigation";
 import { Plus, FilePlus2 } from "lucide-react";
 import { z } from "zod";
 
-import { recentLeadsColumns } from "./columns.crm";
-import { recentLeadsData } from "./crm.config";
-import { lessonSchema } from "./schema";
-
 import { DataTable } from "@/components/data-table/data-table";
 import { DataTablePagination } from "@/components/data-table/data-table-pagination";
 import { DataTableViewOptions } from "@/components/data-table/data-table-view-options";
@@ -18,13 +14,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardAction } from "@/components/ui/card";
 import { useDataTableInstance } from "@/hooks/use-data-table-instance";
 
+import { recentLeadsColumns } from "./columns.crm";
+import { recentLeadsData } from "./crm.config";
+import { lessonSchema } from "./schema";
+
 export function TableCards({ data: initialData }: { data: z.infer<typeof lessonSchema>[] }) {
   const [data, setData] = React.useState(() => initialData);
   const router = useRouter();
   const table = useDataTableInstance({
     data: data,
     columns: recentLeadsColumns,
-    getRowId: (row) => row.id,
+    getRowId: (row) => row._id,
   });
 
   return (

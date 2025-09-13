@@ -1,11 +1,16 @@
 import z from "zod";
 
+import { description } from "../../default/_components/chart-area-interactive";
+
 export const lessonSchema = z.object({
-  id: z.string(),
+  _id: z.string(),
   title: z.string(),
-  type: z.string(),
-  status: z.string(),
+  description: z.string(),
   startTime: z.string(),
   endTime: z.string(),
+  type: z.string(),
+  status: z.string(),
+  videoUrl: z.string().optional(),
+  instructor: z.string(),
   updatedAt: z.string(),
 });

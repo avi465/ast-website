@@ -7,8 +7,10 @@ export interface Lesson {
   startTime: string;
   endTime: string;
   type: "live" | "recorded";
+  status: string;
   videoUrl?: string;
   instructor: string;
+  updatedAt: string;
 }
 
 export interface CreateLessonPayload {
