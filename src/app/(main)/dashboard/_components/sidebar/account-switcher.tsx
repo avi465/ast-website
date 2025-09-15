@@ -18,7 +18,7 @@ import {
   DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu";
 import { cn, getInitials } from "@/lib/utils";
-import { logout } from "@/utils/logout";
+import { logout } from "@/service/auth-service";
 
 export function AccountSwitcher({
   users,

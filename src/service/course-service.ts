@@ -1,7 +1,7 @@
 import { ApiResponse } from "@/types/api-response";
 
 export interface Course {
-  id: string;
+  _id: string;
   name: string;
   language: string;
   status: string;
@@ -16,18 +16,11 @@ export const fetchCourses = async (): Promise<Course[]> => {
     cache: "no-cache",
   });
 
-  if (!response.ok) {
-    throw new Error(`Error ${response.status}: ${response.statusText}`);
-  }
-
   const json: ApiResponse<Course[]> = await response.json();
 
-  if (!json.success) {
-    throw new Error(json.message ?? "Failed to fetch courses");
+  if (!json.success || !response.ok || !json.data) {
+    throw new Error(json.errors?.toString() ?? json.message);
   }
 
-  if (!json.data) {
-    throw new Error("No courses found");
-  }
   return json.data;
 };

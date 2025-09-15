@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { login } from "@/utils/login";
+import { login } from "@/service/auth-service";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }),
@@ -28,6 +28,9 @@ export function LoginForm() {
     onSuccess: () => {
       toast.success("Login successful!");
       router.replace("/dashboard");
+    },
+    onError: (error: any) => {
+      toast.error(error?.message ?? "Login failed. Please try again.");
     },
   });
 

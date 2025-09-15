@@ -72,13 +72,17 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof lessonSchema>>[] = [
   {
     accessorKey: "startTime",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Start" />,
-    cell: ({ row }) => <Badge variant="outline">{row.original.startTime}</Badge>,
+    cell: ({ row }) => (
+      <Badge variant="outline"> {row.original.startTime ? timeAgo(row.original.startTime) : "N/A"} </Badge>
+    ),
     enableSorting: false,
   },
   {
     accessorKey: "endTime",
     header: ({ column }) => <DataTableColumnHeader column={column} title="End" />,
-    cell: ({ row }) => <Badge variant="outline">{row.original.endTime}</Badge>,
+    cell: ({ row }) => (
+      <Badge variant="outline"> {row.original.endTime ? timeAgo(row.original.endTime) : "N/A"} </Badge>
+    ),
     enableSorting: false,
   },
   {

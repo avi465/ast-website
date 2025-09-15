@@ -64,11 +64,11 @@ export const sidebarItems: NavGroup[] = [
         url: "/dashboard/lesson",
         icon: ChartBar,
       },
-      {
-        title: "Finance",
-        url: "/dashboard/finance",
-        icon: Banknote,
-      },
+      // {
+      //   title: "Finance",
+      //   url: "/dashboard/finance",
+      //   icon: Banknote,
+      // },
       // {
       //   title: "Analytics",
       //   url: "/dashboard/analytics",

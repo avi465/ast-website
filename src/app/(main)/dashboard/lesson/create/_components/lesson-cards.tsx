@@ -2,20 +2,33 @@
 
 import * as React from "react";
 
+import { useRouter } from "next/navigation";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Loader2, Save, Radio, Archive } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardAction } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardDescription,
+  CardAction,
+  CardFooter,
+} from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { fetchCourses, Course } from "@/service/course-service";
 import { createLesson, Lesson } from "@/service/lesson-service";
+import { fetchModulesByCourse, Module } from "@/service/module-service";
 import { createStream } from "@/service/stream-service";
 
 import { DateTimePicker } from "./date-time-picker";
@@ -28,7 +41,8 @@ const lessonSchema = z
     endTime: z.date({ required_error: "End time is required" }),
     type: z.enum(["live", "recorded"]),
     videoUrl: z.string().url("Must be valid URL").optional(),
-    module: z.string(),
+    module: z.string().optional(),
+    course: z.string().optional(),
     instructor: z.string().optional(),
   })
   .refine((data) => data.startTime > new Date(), {
@@ -43,6 +57,8 @@ const lessonSchema = z
 type LessonForm = z.infer<typeof lessonSchema>;
 
 export function LessonCard() {
+  const router = useRouter();
+
   const form = useForm<LessonForm>({
     resolver: zodResolver(lessonSchema),
     defaultValues: {
@@ -51,13 +67,43 @@ export function LessonCard() {
       startTime: undefined,
       endTime: undefined,
       type: "live",
-      videoUrl: "",
+      videoUrl: undefined,
       module: "",
     },
   });
 
+  const [onSaveLoading, setOnSaveLoading] = React.useState(false);
+  const [onStartStreamLoading, setOnStartStreamLoading] = React.useState(false);
+  const [onSaveAsDraftLoading, setOnSaveAsDraftLoading] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  const [streamUrl, setStreamUrl] = React.useState<string | null>(null);
+  const [serverUrl, setServerUrl] = React.useState<string | null>(null);
+  const [streamKey, setStreamKey] = React.useState<string | null>(null);
+
+  // Fetch courses
+  const { data: courses = [], isLoading: coursesLoading } = useQuery<Course[]>({
+    queryKey: ["courses"],
+    queryFn: fetchCourses,
+  });
+
+  // Watch selected course
+  const selectedCourse = form.watch("course");
+
+  React.useEffect(() => {
+    // When course changes, reset module
+    form.setValue("module", undefined, { shouldValidate: true });
+  }, [selectedCourse, form]);
+
+  // Fetch modules for selected course
+  const { data: modules = [], isLoading: modulesLoading } = useQuery<Module[]>({
+    queryKey: ["modules", selectedCourse],
+    queryFn: () => (selectedCourse ? fetchModulesByCourse(selectedCourse) : Promise.resolve([])),
+    enabled: !!selectedCourse,
+  });
+
+  const instructors = [
+    { id: "inst1", name: "Instructor 1" },
+    { id: "inst2", name: "Instructor 2" },
+  ];
 
   const createLessonMutation = useMutation({
     mutationFn: (lesson: Partial<LessonForm>) =>
@@ -78,27 +124,46 @@ export function LessonCard() {
     },
   });
 
-  async function onSubmit(values: LessonForm, action: "save" | "stream" | "draft") {
+  async function onSave(values: LessonForm) {
     try {
-      setLoading(true);
+      setOnSaveLoading(true);
+      await createLessonMutation.mutateAsync(values);
+      toast.success("Lesson saved successfully!");
+      form.reset();
+    } catch (err: any) {
+      toast.error(err.message);
+    } finally {
+      setOnSaveLoading(false);
+    }
+  }
 
+  async function onStartStream(values: LessonForm) {
+    try {
+      setOnStartStreamLoading(true);
       const lesson = await createLessonMutation.mutateAsync(values);
-
-      if (action === "stream" || values.type === "live") {
-        const stream = await createStreamMutation.mutateAsync(lesson._id);
-        setStreamUrl(`http://localhost:8000/live/${stream.streamKey}/index.m3u8`);
-        toast.success("Stream created! Use the URL in OBS.");
-      } else if (action === "save") {
-        toast.success("Lesson saved successfully!");
-      } else if (action === "draft") {
-        toast.success("Lesson saved as draft!");
-      }
+      const stream = await createStreamMutation.mutateAsync(lesson._id);
+      setServerUrl(`rtmp://${process.env.RTMP_SERVER_URL}`);
+      setStreamKey(`live/${stream.streamKey}`);
+      toast.success("Stream created! Use the URL in OBS.");
 
       form.reset();
     } catch (err: any) {
       toast.error(err.message);
     } finally {
-      setLoading(false);
+      setOnStartStreamLoading(false);
+    }
+  }
+
+  async function onSaveAsDraft(values: LessonForm) {
+    try {
+      setOnSaveAsDraftLoading(true);
+      await createLessonMutation.mutateAsync(values);
+      toast.success("Lesson saved as draft!");
+      form.reset();
+    } catch (err: any) {
+      toast.error(err.message);
+    } finally {
+      setOnSaveAsDraftLoading(false);
     }
   }
 
@@ -114,10 +179,20 @@ export function LessonCard() {
             variant="outline"
             size="sm"
             type="button"
-            onClick={() => form.handleSubmit((values) => onSubmit(values, isRecorded ? "save" : "stream"))()}
-            disabled={loading}
+            onClick={
+              () =>
+                form.handleSubmit((values) => {
+                  const type = form.getValues("type");
+                  if (type === "recorded") {
+                    onSave(values);
+                  } else {
+                    onStartStream(values);
+                  }
+                })() // <-- call the returned function
+            }
+            disabled={onSaveLoading || onStartStreamLoading}
           >
-            {loading ? (
+            {onSaveLoading || onStartStreamLoading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : isRecorded ? (
               <>
@@ -136,29 +211,28 @@ export function LessonCard() {
             variant="outline"
             size="sm"
             type="button"
-            onClick={() => form.handleSubmit((values) => onSubmit(values, "draft"))()}
-            disabled={loading}
+            onClick={() => form.handleSubmit(onSaveAsDraft)()}
+            disabled={onSaveAsDraftLoading}
           >
-            <Archive className="mr-1 h-4 w-4" />
-            Save as Draft
+            {onSaveAsDraftLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <>
+                <Archive className="mr-1 h-4 w-4" />
+                Save as Draft
+              </>
+            )}
           </Button>
         </CardAction>
       </CardHeader>
 
-      <CardContent className="flex flex-col gap-6">
-        {/* Lesson Details Card */}
-        <Card className="border shadow-none">
-          <CardHeader>
-            <CardTitle className="text-base">Lesson Details</CardTitle>
-          </CardHeader>
+      <CardContent className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <Card className="mx-auto max-w-3xl lg:col-span-1">
           <CardContent>
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit((values) => onSubmit(values, "stream"))}
-                className="grid grid-cols-1 gap-8 lg:grid-cols-2"
-              >
-                {/* Left side */}
-                <div className="flex flex-col gap-6">
+              <form className="space-y-8">
+                {/* Lesson Details Section */}
+                <div className="space-y-6">
                   <FormField
                     control={form.control}
                     name="title"
@@ -173,6 +247,7 @@ export function LessonCard() {
                     )}
                   />
 
+                  {/* Description */}
                   <FormField
                     control={form.control}
                     name="description"
@@ -187,6 +262,7 @@ export function LessonCard() {
                     )}
                   />
 
+                  {/* Start Time */}
                   <FormField
                     control={form.control}
                     name="startTime"
@@ -205,6 +281,7 @@ export function LessonCard() {
                     )}
                   />
 
+                  {/* End Time */}
                   <FormField
                     control={form.control}
                     name="endTime"
@@ -218,44 +295,101 @@ export function LessonCard() {
                       </FormItem>
                     )}
                   />
+                </div>
 
+                {/* Course & Instructor Section */}
+                <div className="mx-auto w-full max-w-2xl space-y-6">
+                  {/* Course Select */}
                   <FormField
                     control={form.control}
-                    name="module"
+                    name="course"
                     render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Module</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Please select module" {...field} />
-                        </FormControl>
+                      <FormItem className="w-full max-w-sm">
+                        <FormLabel>Course</FormLabel>
+                        <Select value={field.value} onValueChange={field.onChange} disabled={coursesLoading}>
+                          <FormControl>
+                            <SelectTrigger className="w-full truncate">
+                              <SelectValue placeholder="Select course" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="max-h-60">
+                            {courses.map((course) => (
+                              <SelectItem key={course._id} value={course._id} className="max-w-[280px] truncate">
+                                {course.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
 
+                  {/* Module Select */}
+                  <FormField
+                    control={form.control}
+                    name="module"
+                    render={({ field }) => (
+                      <FormItem className="w-full max-w-sm">
+                        <FormLabel>Module</FormLabel>
+                        <Select
+                          value={field.value ?? ""}
+                          onValueChange={field.onChange}
+                          disabled={!selectedCourse || modulesLoading}
+                        >
+                          <FormControl>
+                            <SelectTrigger className="w-full truncate">
+                              <SelectValue placeholder="Select module" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="max-h-60">
+                            {modules.map((mod) => (
+                              <SelectItem key={mod._id} value={mod._id} className="max-w-[280px] truncate">
+                                {mod.title}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Instructor Select */}
                   <FormField
                     control={form.control}
                     name="instructor"
                     render={({ field }) => (
-                      <FormItem>
+                      <FormItem className="w-full max-w-sm">
                         <FormLabel>Instructor</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Instructor name" {...field} />
-                        </FormControl>
+                        <Select value={field.value} onValueChange={field.onChange}>
+                          <FormControl>
+                            <SelectTrigger className="w-full truncate">
+                              <SelectValue placeholder="Select instructor" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="max-h-60">
+                            {instructors.map((inst) => (
+                              <SelectItem key={inst.id} value={inst.id} className="max-w-[280px] truncate">
+                                {inst.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
                 </div>
 
-                {/* Right side */}
-                <div className="flex flex-col gap-6">
-                  {/* Switch for type */}
+                {/* Lesson Type Section */}
+                <div className="space-y-6">
+                  {/* Type Switch */}
                   <FormField
                     control={form.control}
                     name="type"
                     render={({ field }) => (
-                      <FormItem className="flex items-center justify-between rounded-md border p-3">
+                      <FormItem className="flex items-center justify-between rounded-md border p-4">
                         <div>
                           <FormLabel>Recorded Lesson</FormLabel>
                           <p className="text-muted-foreground text-sm">Toggle between live and recorded</p>
@@ -270,6 +404,7 @@ export function LessonCard() {
                     )}
                   />
 
+                  {/* Video URL if recorded */}
                   {isRecorded && (
                     <FormField
                       control={form.control}
@@ -289,22 +424,86 @@ export function LessonCard() {
               </form>
             </Form>
           </CardContent>
+
+          <CardFooter className="flex justify-end gap-4">
+            <Button
+              variant="outline"
+              type="button"
+              onClick={() => {
+                form.reset();
+                router.push("/dashboard/lesson");
+              }}
+            >
+              Cancel
+            </Button>
+            <Button type="button" onClick={() => form.handleSubmit(onSave)()} disabled={!isRecorded || onSaveLoading}>
+              {onSaveLoading || onStartStreamLoading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <>
+                  <Save className="mr-1 h-4 w-4" />
+                  Save Lesson
+                </>
+              )}
+            </Button>
+          </CardFooter>
         </Card>
 
-        {/* Streaming Details Card */}
-        {streamUrl && (
-          <Card className="border shadow-none">
-            <CardHeader>
-              <CardTitle className="text-base">Streaming Details</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="bg-muted/40 rounded-md border p-4">
-                <p className="text-muted-foreground mb-1 text-sm">OBS Stream URL</p>
-                <code className="block text-sm break-all">{streamUrl}</code>
-              </div>
-            </CardContent>
-          </Card>
-        )}
+        {/* OBS Setup Guide */}
+        <Card className="border shadow-none lg:col-span-2">
+          <CardHeader>
+            <CardTitle className="text-base">How to Start Streaming with OBS</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {/* Step 1 - Server URL */}
+            <div className="bg-muted/40 rounded-md border p-4">
+              <p className="text-sm font-medium">1. Server (OBS Stream URL)</p>
+              <code className="mt-1 block text-sm break-all">{serverUrl}</code>
+              <p className="text-muted-foreground mt-1 text-xs">
+                Copy this and paste it in OBS under <strong>Settings → Stream → Server</strong>.
+              </p>
+            </div>
+
+            {/* Step 2 - Stream Key */}
+            <div className="bg-muted/40 rounded-md border p-4">
+              <p className="text-sm font-medium">2. Stream Key</p>
+              <code className="mt-1 block text-sm break-all">
+                {streamKey ?? "Your unique stream key will appear here"}
+              </code>
+              <p className="text-muted-foreground mt-1 text-xs">
+                Paste this in OBS under <strong>Settings → Stream → Stream Key</strong>. Never share this key with
+                anyone!
+              </p>
+            </div>
+
+            {/* Step 3 - OBS Setup Tips */}
+            <div className="bg-muted/40 space-y-2 rounded-md border p-4">
+              <p className="text-sm font-medium">3. OBS Setup Tips</p>
+              <ul className="text-muted-foreground list-disc space-y-1 pl-4 text-sm">
+                <li>
+                  Open OBS and go to <strong>Settings → Stream</strong>.
+                </li>
+                <li>
+                  Set <strong>Service</strong> to <code>Custom</code>.
+                </li>
+                <li>
+                  Paste the <strong>Server URL</strong> and <strong>Stream Key</strong> provided above.
+                </li>
+                <li>
+                  Click <strong>Apply</strong> and then <strong>Start Streaming</strong>.
+                </li>
+              </ul>
+            </div>
+
+            {/* Step 4 - Verify */}
+            <div className="bg-muted/40 rounded-md border p-4">
+              <p className="text-sm font-medium">4. Verify Stream</p>
+              <p className="text-muted-foreground mt-1 text-xs">
+                Once streaming starts, come back here and refresh to see your live stream status.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
       </CardContent>
     </Card>
   );
