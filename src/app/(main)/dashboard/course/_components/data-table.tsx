@@ -20,7 +20,7 @@ import { sectionSchema } from "./schema";
 export function DataTable({ data: initialData }: { data: z.infer<typeof sectionSchema>[] }) {
   const [data, setData] = React.useState(() => initialData);
   const columns = withDndColumn(dashboardColumns);
-  const table = useDataTableInstance({ data, columns, getRowId: (row) => row.id });
+  const table = useDataTableInstance({ data, columns, getRowId: (row) => row._id });
 
   return (
     <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
