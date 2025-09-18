@@ -287,7 +287,7 @@ export function CreateCourse() {
                               <SelectValue placeholder="Select category" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent>
+                          <SelectContent className="w-[var(--radix-select-trigger-width)] min-w-[var(--radix-select-trigger-width)]">
                             {categories?.map(
                               (category) =>
                                 category.isActive && (

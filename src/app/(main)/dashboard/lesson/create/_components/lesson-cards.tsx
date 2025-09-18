@@ -226,85 +226,79 @@ export function LessonCard() {
         </CardAction>
       </CardHeader>
 
-      <CardContent className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <Card className="mx-auto max-w-3xl lg:col-span-1">
+      <CardContent className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <Card className="border shadow-none lg:col-span-2">
           <CardContent>
             <Form {...form}>
-              <form className="space-y-8">
+              <form className="space-y-6">
                 {/* Lesson Details Section */}
-                <div className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="title"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Lesson Title</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Enter lesson title" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Lesson Title</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter lesson title" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                  {/* Description */}
-                  <FormField
-                    control={form.control}
-                    name="description"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Description</FormLabel>
-                        <FormControl>
-                          <Textarea rows={4} placeholder="Enter lesson description" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                {/* Description */}
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Description</FormLabel>
+                      <FormControl>
+                        <Textarea rows={4} placeholder="Enter lesson description" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                  {/* Start Time */}
-                  <FormField
-                    control={form.control}
-                    name="startTime"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Start Time</FormLabel>
-                        <FormControl>
-                          <DateTimePicker
-                            value={field.value}
-                            onChange={field.onChange}
-                            placeholder="Select start date"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                {/* Start Time */}
+                <FormField
+                  control={form.control}
+                  name="startTime"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Start Time</FormLabel>
+                      <FormControl>
+                        <DateTimePicker value={field.value} onChange={field.onChange} placeholder="Select start date" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                  {/* End Time */}
-                  <FormField
-                    control={form.control}
-                    name="endTime"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>End Time</FormLabel>
-                        <FormControl>
-                          <DateTimePicker value={field.value} onChange={field.onChange} placeholder="Select end date" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                {/* End Time */}
+                <FormField
+                  control={form.control}
+                  name="endTime"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>End Time</FormLabel>
+                      <FormControl>
+                        <DateTimePicker value={field.value} onChange={field.onChange} placeholder="Select end date" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
                 {/* Course & Instructor Section */}
-                <div className="mx-auto w-full max-w-2xl space-y-6">
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                   {/* Course Select */}
                   <FormField
                     control={form.control}
                     name="course"
                     render={({ field }) => (
-                      <FormItem className="w-full max-w-sm">
+                      <FormItem>
                         <FormLabel>Course</FormLabel>
                         <Select value={field.value} onValueChange={field.onChange} disabled={coursesLoading}>
                           <FormControl>
@@ -312,9 +306,9 @@ export function LessonCard() {
                               <SelectValue placeholder="Select course" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent className="max-h-60">
+                          <SelectContent className="w-[var(--radix-select-trigger-width)] min-w-[var(--radix-select-trigger-width)]">
                             {courses.map((course) => (
-                              <SelectItem key={course._id} value={course._id} className="max-w-[280px] truncate">
+                              <SelectItem key={course._id} value={course._id}>
                                 {course.name}
                               </SelectItem>
                             ))}
@@ -330,7 +324,7 @@ export function LessonCard() {
                     control={form.control}
                     name="module"
                     render={({ field }) => (
-                      <FormItem className="w-full max-w-sm">
+                      <FormItem>
                         <FormLabel>Module</FormLabel>
                         <Select
                           value={field.value ?? ""}
@@ -342,9 +336,9 @@ export function LessonCard() {
                               <SelectValue placeholder="Select module" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent className="max-h-60">
+                          <SelectContent className="w-[var(--radix-select-trigger-width)] min-w-[var(--radix-select-trigger-width)]">
                             {modules.map((mod) => (
-                              <SelectItem key={mod._id} value={mod._id} className="max-w-[280px] truncate">
+                              <SelectItem key={mod._id} value={mod._id}>
                                 {mod.title}
                               </SelectItem>
                             ))}
@@ -360,7 +354,7 @@ export function LessonCard() {
                     control={form.control}
                     name="instructor"
                     render={({ field }) => (
-                      <FormItem className="w-full max-w-sm">
+                      <FormItem>
                         <FormLabel>Instructor</FormLabel>
                         <Select value={field.value} onValueChange={field.onChange} disabled={true}>
                           <FormControl>
@@ -368,9 +362,9 @@ export function LessonCard() {
                               <SelectValue placeholder="Select instructor" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent className="max-h-60">
+                          <SelectContent className="w-[var(--radix-select-trigger-width)] min-w-[var(--radix-select-trigger-width)]">
                             {instructors.map((inst) => (
-                              <SelectItem key={inst.id} value={inst.id} className="max-w-[280px] truncate">
+                              <SelectItem key={inst.id} value={inst.id}>
                                 {inst.name}
                               </SelectItem>
                             ))}
@@ -425,7 +419,7 @@ export function LessonCard() {
             </Form>
           </CardContent>
 
-          <CardFooter className="flex justify-end gap-4">
+          <CardFooter className="flex justify-end gap-3">
             <Button
               variant="outline"
               type="button"
@@ -450,7 +444,7 @@ export function LessonCard() {
         </Card>
 
         {/* OBS Setup Guide */}
-        <Card className="border shadow-none lg:col-span-2">
+        <Card className="hidden border shadow-none lg:block">
           <CardHeader>
             <CardTitle className="text-base">How to Start Streaming with OBS</CardTitle>
           </CardHeader>
