@@ -2,6 +2,8 @@
 
 import * as React from "react";
 
+import { useRouter } from "next/navigation";
+
 import { Plus } from "lucide-react";
 import { z } from "zod";
 
@@ -19,6 +21,7 @@ import { sectionSchema } from "./schema";
 
 export function DataTable({ data: initialData }: { data: z.infer<typeof sectionSchema>[] }) {
   const [data, setData] = React.useState(() => initialData);
+  const router = useRouter();
   const columns = withDndColumn(dashboardColumns);
   const table = useDataTableInstance({ data, columns, getRowId: (row) => row._id });
 
@@ -30,7 +33,7 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof sectionS
         <CardAction>
           <div className="flex items-center gap-2">
             <DataTableViewOptions table={table} />
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={() => router.push("/dashboard/course/create")}>
               <Plus />
               <span className="hidden lg:inline">New Course</span>
             </Button>

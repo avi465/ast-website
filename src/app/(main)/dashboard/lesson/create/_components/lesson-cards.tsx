@@ -362,7 +362,7 @@ export function LessonCard() {
                     render={({ field }) => (
                       <FormItem className="w-full max-w-sm">
                         <FormLabel>Instructor</FormLabel>
-                        <Select value={field.value} onValueChange={field.onChange}>
+                        <Select value={field.value} onValueChange={field.onChange} disabled={true}>
                           <FormControl>
                             <SelectTrigger className="w-full truncate">
                               <SelectValue placeholder="Select instructor" />

@@ -1,11 +1,11 @@
 "use client";
 
-import { LessonCard } from "./_components/lesson-cards";
+import { CreateCourse } from "./_components/create-course";
 
 export default function Page() {
   return (
     <div className="flex flex-col gap-4 md:gap-6">
-      <LessonCard />
+      <CreateCourse />
     </div>
   );
 }

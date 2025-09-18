@@ -9,11 +9,12 @@ export function SectionCards() {
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>Total Revenue</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">$1,250.00</CardTitle>
+          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">₹ null</CardTitle>
           <CardAction>
             <Badge variant="outline">
               <TrendingUp />
-              +12.5%
+              +null%
+              {/* +12.5% */}
             </Badge>
           </CardAction>
         </CardHeader>
@@ -27,17 +28,22 @@ export function SectionCards() {
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>New Customers</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">1,234</CardTitle>
+          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">null</CardTitle>
+          {/* <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">1,234</CardTitle> */}
           <CardAction>
             <Badge variant="outline">
               <TrendingDown />
-              -20%
+              -null%
+              {/* -20% */}
             </Badge>
           </CardAction>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
+          {/* <div className="line-clamp-1 flex gap-2 font-medium">*/}
+          {/*  Down 20% this period <TrendingDown className="size-4" />*/}
+          {/* </div> */}
           <div className="line-clamp-1 flex gap-2 font-medium">
-            Down 20% this period <TrendingDown className="size-4" />
+            Down null% this period <TrendingDown className="size-4" />
           </div>
           <div className="text-muted-foreground">Acquisition needs attention</div>
         </CardFooter>
@@ -45,11 +51,13 @@ export function SectionCards() {
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>Active Accounts</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">45,678</CardTitle>
+          {/* <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">45,678</CardTitle> */}
+          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">null</CardTitle>
           <CardAction>
             <Badge variant="outline">
               <TrendingUp />
-              +12.5%
+              +null%
+              {/* +12.5% */}
             </Badge>
           </CardAction>
         </CardHeader>
@@ -63,11 +71,13 @@ export function SectionCards() {
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>Growth Rate</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">4.5%</CardTitle>
+          {/* <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">4.5%</CardTitle> */}
+          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">null%</CardTitle>
           <CardAction>
             <Badge variant="outline">
               <TrendingUp />
-              +4.5%
+              +null%
+              {/* +4.5% */}
             </Badge>
           </CardAction>
         </CardHeader>
