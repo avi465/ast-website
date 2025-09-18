@@ -142,9 +142,9 @@ export function LessonCard() {
       setOnStartStreamLoading(true);
       const lesson = await createLessonMutation.mutateAsync(values);
       const stream = await createStreamMutation.mutateAsync(lesson._id);
-      setServerUrl(`rtmp://${process.env.RTMP_SERVER_URL}/live`);
+      setServerUrl(`rtmp://${process.env.NEXT_PUBLIC_RTMP_SERVER_URL}/live`);
       setStreamKey(`${stream.streamKey}`);
-      toast.success("Stream created! Use the URL in OBS.");
+      toast.success(process.env.NEXT_PUBLIC_RTMP_SERVER_URL);
 
       form.reset();
     } catch (err: any) {
