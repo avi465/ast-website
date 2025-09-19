@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { timeAgo } from "@/utils/formate-date";
 
 import { lessonSchema } from "./schema";
+import { TableCellViewer } from "./table-cell-viewer";
 
 export const recentLeadsColumns: ColumnDef<z.infer<typeof lessonSchema>>[] = [
   {
@@ -37,11 +38,9 @@ export const recentLeadsColumns: ColumnDef<z.infer<typeof lessonSchema>>[] = [
   {
     accessorKey: "title",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Title" />,
-    cell: ({ row }) => (
-      <Button variant="link" className="text-foreground w-fit px-0 text-left">
-        {row.original.title}
-      </Button>
-    ),
+    cell: ({ row }) => {
+      return <TableCellViewer item={row.original} />;
+    },
     enableHiding: false,
     enableSorting: false,
   },

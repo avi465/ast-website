@@ -9,7 +9,14 @@ export interface Lesson {
   type: "live" | "recorded";
   status: string;
   videoUrl?: string;
+  stream: Stream;
   instructor: string;
+  updatedAt: string;
+}
+
+export interface Stream {
+  streamKey: string;
+  createdAt: string;
   updatedAt: string;
 }
 
