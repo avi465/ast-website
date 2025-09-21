@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -48,6 +50,13 @@ export function TableCellViewer({ item }: { item: z.infer<typeof lessonSchema> }
               <Label htmlFor="header">Stream Key</Label>
               <Input id="header" readOnly={true} defaultValue={item.stream?.streamKey} />
             </div>
+            <div className="flex flex-col gap-3">
+              <Button variant={"outline"}>
+                <Link href={`https://advancedstudytutorial.in/player/hls?key=${item.stream?.streamKey}`}>
+                  Player Link
+                </Link>
+              </Button>
+            </div>
             {/* <div className="grid grid-cols-2 gap-4">*/}
             {/*  <div className="flex flex-col gap-3">*/}
             {/*    <Label htmlFor="type">Type</Label>*/}
@@ -75,16 +84,16 @@ export function TableCellViewer({ item }: { item: z.infer<typeof lessonSchema> }
             {/*    </Select>*/}
             {/*  </div>*/}
             {/* </div>*/}
-            {/* <div className="grid grid-cols-2 gap-4">*/}
-            {/*  <div className="flex flex-col gap-3">*/}
-            {/*    <Label htmlFor="target">Vide Url</Label>*/}
-            {/*    <Input id="target" defaultValue={item.videoUrl} />*/}
-            {/*  </div>*/}
-            {/*   <div className="flex flex-col gap-3">*/}
-            {/*    <Label htmlFor="limit">Limit</Label>*/}
-            {/*    <Input id="limit" defaultValue={item.limit} />*/}
-            {/*   </div>*/}
-            {/* </div>*/}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex flex-col gap-3">
+                <Label htmlFor="target">Instructor</Label>
+                <Input id="target" defaultValue={item.instructor} />
+              </div>
+              <div className="flex flex-col gap-3">
+                <Label htmlFor="limit">Status</Label>
+                <Input id="limit" defaultValue={item.status} />
+              </div>
+            </div>
             {/* <div className="flex flex-col gap-3">*/}
             {/*  <Label htmlFor="reviewer">Reviewer</Label>*/}
             {/*  <Select defaultValue={item.reviewer}>*/}

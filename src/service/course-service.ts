@@ -3,8 +3,11 @@ import { ApiResponse, extractErrorMessage, isApiError } from "@/types/api-respon
 export interface Course {
   _id: string;
   name: string;
+  description: string;
+  details: string;
   language: string;
   status: string;
+  isActive: boolean;
   price: number;
   discount: number;
   updatedAt: string;
@@ -67,7 +70,6 @@ export const createCourse = async (course: Partial<CourseInput>): Promise<Course
 export const fetchAllCategories = async (): Promise<CategoryOutput[] | null> => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/category`, {
     method: "GET",
-    cache: "no-cache",
   });
 
   const json: ApiResponse<CategoryOutput[]> = await response.json();
