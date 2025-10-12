@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "name": "Vacation Photo",
+    "type": "image",
+    "url": "/files/vacation.jpg",
+    "size": 204800,
+    "createdAt": "2024-06-01T10:00:00Z"
+  },
+  {
+    "id": "2",
+    "name": "Resume",
+    "type": "pdf",
+    "url": "/files/resume.pdf",
+    "size": 102400,
+    "createdAt": "2024-05-28T14:30:00Z"
+  },
+  {
+    "id": "3",
+    "name": "Demo Video",
+    "type": "video",
+    "url": "/files/demo.mp4",
+    "size": 10485760,
+    "createdAt": "2024-06-02T09:15:00Z"
+  },
+  {
+    "id": "4",
+    "name": "Project Archive",
+    "type": "zip",
+    "url": "/files/project.zip",
+    "size": 512000,
+    "createdAt": "2024-05-20T08:00:00Z"
+  },
+  {
+    "id": "5",
+    "name": "Notes",
+    "type": "doc",
+    "url": "/files/notes.docx",
+    "size": 40960,
+    "createdAt": "2024-06-03T11:45:00Z"
+  }
+]

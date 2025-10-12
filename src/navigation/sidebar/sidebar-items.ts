@@ -17,6 +17,10 @@ import {
   Gauge,
   GraduationCap,
   type LucideIcon,
+  File,
+  FileImage,
+  FilesIcon,
+  FolderClosed,
 } from "lucide-react";
 
 export interface NavSubItem {
@@ -63,6 +67,11 @@ export const sidebarItems: NavGroup[] = [
         title: "Lesson",
         url: "/dashboard/lesson",
         icon: ChartBar,
+      },
+      {
+        title: "Files",
+        url: "/dashboard/files",
+        icon: FolderClosed,
       },
       // {
       //   title: "Finance",

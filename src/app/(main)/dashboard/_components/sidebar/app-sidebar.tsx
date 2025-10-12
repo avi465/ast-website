@@ -1,5 +1,6 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
 import { Settings, CircleHelp, Search, Database, ClipboardList, File, Command } from "lucide-react";
 
 import {
@@ -14,6 +15,7 @@ import {
 import { APP_CONFIG } from "@/config/app-config";
 import { rootUser } from "@/data/users";
 import { sidebarItems } from "@/navigation/sidebar/sidebar-items";
+import { Profile, fetchProfile } from "@/service/profile-service";
 
 import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
@@ -56,6 +58,18 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { data: profile, isError } = useQuery<Profile | null>({
+    queryKey: ["profile"],
+    queryFn: fetchProfile,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    retry: 0,
+  });
+
+  if (isError) {
+    // optional: handle/report error, keep using fallback user
+    console.error("Failed to fetch profile, using fallback user");
+  }
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -76,7 +90,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={rootUser} />
+        <NavUser user={profile ?? rootUser} />
       </SidebarFooter>
     </Sidebar>
   );

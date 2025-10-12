@@ -46,15 +46,6 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof sectionS
         </div>
         <DataTablePagination table={table} />
       </TabsContent>
-      <TabsContent value="past-performance" className="flex flex-col">
-        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
-      </TabsContent>
-      <TabsContent value="key-personnel" className="flex flex-col">
-        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
-      </TabsContent>
-      <TabsContent value="focus-documents" className="flex flex-col">
-        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
-      </TabsContent>
     </Tabs>
   );
 }

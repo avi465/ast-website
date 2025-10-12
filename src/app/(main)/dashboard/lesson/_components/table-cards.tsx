@@ -11,7 +11,8 @@ import { DataTable } from "@/components/data-table/data-table";
 import { DataTablePagination } from "@/components/data-table/data-table-pagination";
 import { DataTableViewOptions } from "@/components/data-table/data-table-view-options";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardAction } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardAction } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useDataTableInstance } from "@/hooks/use-data-table-instance";
 
 import { recentLeadsColumns } from "./columns.crm";
@@ -28,28 +29,26 @@ export function TableCards({ data: initialData }: { data: z.infer<typeof lessonS
   });
 
   return (
-    <div className="grid grid-cols-1 gap-4 *:data-[slot=card]:shadow-xs">
-      <Card>
-        <CardHeader>
-          <CardTitle>All lessons</CardTitle>
-          <CardDescription>Manage your lessons and their status.</CardDescription>
-          <CardAction>
-            <div className="flex items-center gap-2">
-              <DataTableViewOptions table={table} />
-              <Button variant="outline" size="sm" onClick={() => router.push("/dashboard/lesson/create")}>
-                <FilePlus2 />
-                <span className="hidden lg:inline">New Lesson</span>
-              </Button>
-            </div>
-          </CardAction>
-        </CardHeader>
-        <CardContent className="flex size-full flex-col gap-4">
-          <div className="overflow-hidden rounded-md border">
-            <DataTable table={table} columns={recentLeadsColumns} />
+    <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
+      <CardHeader>
+        <CardTitle>All lessons</CardTitle>
+        <CardDescription>Manage your lessons and their status.</CardDescription>
+        <CardAction>
+          <div className="flex items-center gap-2">
+            <DataTableViewOptions table={table} />
+            <Button variant="outline" size="sm" onClick={() => router.push("/dashboard/lesson/create")}>
+              <FilePlus2 />
+              <span className="hidden lg:inline">New Lesson</span>
+            </Button>
           </div>
-          <DataTablePagination table={table} />
-        </CardContent>
-      </Card>
-    </div>
+        </CardAction>
+      </CardHeader>
+      <TabsContent value="outline" className="relative flex flex-col gap-4 overflow-auto">
+        <div className="overflow-hidden rounded-md border">
+          <DataTable table={table} columns={recentLeadsColumns} />
+        </div>
+        <DataTablePagination table={table} />
+      </TabsContent>
+    </Tabs>
   );
 }

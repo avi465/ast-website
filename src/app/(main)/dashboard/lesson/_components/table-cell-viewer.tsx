@@ -50,13 +50,6 @@ export function TableCellViewer({ item }: { item: z.infer<typeof lessonSchema> }
               <Label htmlFor="header">Stream Key</Label>
               <Input id="header" readOnly={true} defaultValue={item.stream?.streamKey} />
             </div>
-            <div className="flex flex-col gap-3">
-              <Button variant={"outline"}>
-                <Link href={`https://advancedstudytutorial.in/player/hls?key=${item.stream?.streamKey}`}>
-                  Player Link
-                </Link>
-              </Button>
-            </div>
             {/* <div className="grid grid-cols-2 gap-4">*/}
             {/*  <div className="flex flex-col gap-3">*/}
             {/*    <Label htmlFor="type">Type</Label>*/}

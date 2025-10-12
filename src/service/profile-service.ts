@@ -4,7 +4,10 @@ export interface Profile {
   _id: string;
   name: string;
   email: string;
+  userName: string;
+  avatar: string;
   phone?: string;
+  role: "admin";
   createdAt: string;
   updatedAt: string;
 }
