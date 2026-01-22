@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Loader2, Save, Radio, Archive } from "lucide-react";
+import { Loader2, Save, Radio, Archive, Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -150,14 +150,12 @@ export function CreateCourse() {
   }
 
   return (
-    <Card>
+    <>
       <CardHeader>
-        <div className="flex items-center justify-between">
-          <div>
-            <CardTitle>Create Course</CardTitle>
-            <CardDescription>Provide details to set up your new course.</CardDescription>
-          </div>
-          <div className="flex gap-2">
+        <CardTitle>Create Course</CardTitle>
+        <CardDescription>Provide details to set up your new course.</CardDescription>
+        <CardAction>
+          <div className="flex items-center gap-2">
             <Button
               variant="outline"
               size="sm"
@@ -169,8 +167,8 @@ export function CreateCourse() {
                 <Loader2 className="h-4 w-4 animate-spin" />
               ) : (
                 <>
-                  <Save className="mr-1 h-4 w-4" />
-                  Save
+                  <Save />
+                  <span className="hidden lg:inline">Save</span>
                 </>
               )}
             </Button>
@@ -185,15 +183,14 @@ export function CreateCourse() {
                 <Loader2 className="h-4 w-4 animate-spin" />
               ) : (
                 <>
-                  <Archive className="mr-1 h-4 w-4" />
-                  Save as Draft
+                  <Archive />
+                  <span className="hidden lg:inline">Save as Draft</span>
                 </>
               )}
             </Button>
           </div>
-        </div>
+        </CardAction>
       </CardHeader>
-
       <CardContent className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Left Column (Form) */}
         <Card className="border shadow-none lg:col-span-2">
@@ -370,6 +367,6 @@ export function CreateCourse() {
           </CardContent>
         </Card>
       </CardContent>
-    </Card>
+    </>
   );
 }

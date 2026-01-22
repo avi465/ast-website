@@ -170,59 +170,61 @@ export function LessonCard() {
   const isRecorded = form.watch("type") === "recorded";
 
   return (
-    <Card>
+    <>
       <CardHeader>
         <CardTitle>Create Lesson</CardTitle>
         <CardDescription>Fill in the details and configure streaming.</CardDescription>
-        <CardAction className="flex gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            type="button"
-            onClick={
-              () =>
-                form.handleSubmit((values) => {
-                  const type = form.getValues("type");
-                  if (type === "recorded") {
-                    onSave(values);
-                  } else {
-                    onStartStream(values);
-                  }
-                })() // <-- call the returned function
-            }
-            disabled={onSaveLoading || onStartStreamLoading}
-          >
-            {onSaveLoading || onStartStreamLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : isRecorded ? (
-              <>
-                <Save className="mr-1 h-4 w-4" />
-                Save
-              </>
-            ) : (
-              <>
-                <Radio className="mr-1 h-4 w-4" />
-                Start Stream
-              </>
-            )}
-          </Button>
+        <CardAction>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              type="button"
+              onClick={
+                () =>
+                  form.handleSubmit((values) => {
+                    const type = form.getValues("type");
+                    if (type === "recorded") {
+                      onSave(values);
+                    } else {
+                      onStartStream(values);
+                    }
+                  })() // <-- call the returned function
+              }
+              disabled={onSaveLoading || onStartStreamLoading}
+            >
+              {onSaveLoading || onStartStreamLoading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : isRecorded ? (
+                <>
+                  <Save className="mr-1 h-4 w-4" />
+                  Save
+                </>
+              ) : (
+                <>
+                  <Radio />
+                  <span className="hidden lg:inline">Start Stream</span>
+                </>
+              )}
+            </Button>
 
-          <Button
-            variant="outline"
-            size="sm"
-            type="button"
-            onClick={() => form.handleSubmit(onSaveAsDraft)()}
-            disabled={onSaveAsDraftLoading}
-          >
-            {onSaveAsDraftLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <>
-                <Archive className="mr-1 h-4 w-4" />
-                Save as Draft
-              </>
-            )}
-          </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              type="button"
+              onClick={() => form.handleSubmit(onSaveAsDraft)()}
+              disabled={onSaveAsDraftLoading}
+            >
+              {onSaveAsDraftLoading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <>
+                  <Archive />
+                  <span className="hidden lg:inline">Save as Draft</span>
+                </>
+              )}
+            </Button>
+          </div>
         </CardAction>
       </CardHeader>
 
@@ -499,6 +501,6 @@ export function LessonCard() {
           </CardContent>
         </Card>
       </CardContent>
-    </Card>
+    </>
   );
 }
