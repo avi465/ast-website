@@ -1,0 +1,53 @@
+/*
+label: Obsidian Matrix
+value: obsidian-matrix
+*/
+
+.dark:root[data-theme-preset="obsidian-matrix"] {
+    --radius: 2px;
+
+    --background: oklch(0.05 0.01 160);
+    --foreground: oklch(0.95 0.02 160);
+
+    --card: oklch(0.1 0.02 160);
+    --card-foreground: oklch(0.95 0.02 160);
+
+    --popover: oklch(0.1 0.02 160);
+    --popover-foreground: oklch(0.95 0.02 160);
+
+    --primary: oklch(0.75 0.28 145);
+    --primary-foreground: oklch(0.05 0 0);
+
+    --secondary: oklch(0.7 0.25 200);
+    --secondary-foreground: oklch(0.05 0 0);
+
+    --muted: oklch(0.16 0.02 160);
+    --muted-foreground: oklch(0.75 0.02 160);
+
+    --accent: oklch(0.7 0.3 25);
+    --accent-foreground: oklch(0.05 0 0);
+
+    --destructive: oklch(0.65 0.32 27);
+
+    --border: oklch(0.22 0.02 160);
+    --input: oklch(0.22 0.02 160);
+    --ring: oklch(0.75 0.28 145);
+
+    --chart-1: oklch(0.75 0.28 145);
+    --chart-2: oklch(0.7 0.25 200);
+    --chart-3: oklch(0.7 0.3 25);
+    --chart-4: oklch(0.68 0.26 90);
+    --chart-5: oklch(0.65 0.28 320);
+
+    --sidebar: oklch(0.06 0.01 160);
+    --sidebar-foreground: oklch(0.95 0.02 160);
+
+    --sidebar-primary: oklch(0.75 0.28 145);
+    --sidebar-primary-foreground: oklch(0.05 0 0);
+
+    --sidebar-accent: oklch(0.14 0.02 160);
+    --sidebar-accent-foreground: oklch(0.95 0.02 160);
+
+    --sidebar-border: oklch(0.22 0.02 160);
+    --sidebar-ring: oklch(0.75 0.28 145);
+}

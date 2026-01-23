@@ -5,6 +5,11 @@
 @import "../styles/presets/brutalist.css";
 @import "../styles/presets/soft-pop.css";
 @import "../styles/presets/tangerine.css";
+@import "../styles/presets/aurora-glass.css";
+@import "../styles/presets/midnight-ops.css";
+@import "../styles/presets/obsidian-matrix.css";
+@import "../styles/presets/clean-ai.css";
+@import "../styles/presets/enterprise-slate.css";
 
 @custom-variant dark (&:is(.dark *));
 

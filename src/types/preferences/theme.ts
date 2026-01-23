@@ -25,6 +25,14 @@ export const THEME_PRESET_OPTIONS = [
     },
   },
   {
+    label: "Aurora Glass",
+    value: "aurora-glass",
+    primary: {
+      light: "oklch(0.68 0.2 265)",
+      dark: "",
+    },
+  },
+  {
     label: "Brutalist",
     value: "brutalist",
     primary: {
@@ -33,19 +41,35 @@ export const THEME_PRESET_OPTIONS = [
     },
   },
   {
-    label: "Cyber Noir",
-    value: "cyber-noir",
+    label: "Clean AI",
+    value: "clean-ai",
     primary: {
-      light: "oklch(0.72 0.25 270)",
+      light: "oklch(0.65 0.16 210)",
       dark: "",
     },
   },
   {
-    label: "Paper Ink",
-    value: "paper-ink",
+    label: "Enterprise Slate",
+    value: "enterprise-slate",
     primary: {
-      light: "oklch(0.45 0.18 30)",
-      dark: "",
+      light: "oklch(0.58 0.14 250)",
+      dark: "oklch(0.7 0.16 250)",
+    },
+  },
+  {
+    label: "Midnight Ops",
+    value: "midnight-ops",
+    primary: {
+      light: "oklch(0.7 0.2 260)",
+      dark: "oklch(0.7 0.2 260)",
+    },
+  },
+  {
+    label: "Obsidian Matrix",
+    value: "obsidian-matrix",
+    primary: {
+      light: "oklch(0.75 0.28 145)",
+      dark: "oklch(0.75 0.28 145)",
     },
   },
   {
@@ -54,14 +78,6 @@ export const THEME_PRESET_OPTIONS = [
     primary: {
       light: "oklch(0.5106 0.2301 276.9656)",
       dark: "oklch(0.6801 0.1583 276.9349)",
-    },
-  },
-  {
-    label: "Solar Pastel",
-    value: "solar-pastel",
-    primary: {
-      light: "oklch(0.7 0.18 35)",
-      dark: "",
     },
   },
   {
