@@ -43,7 +43,7 @@ export function SectionCards() {
           {/*  Down 20% this period <TrendingDown className="size-4" />*/}
           {/* </div> */}
           <div className="line-clamp-1 flex gap-2 font-medium">
-            Down null% this period <TrendingDown className="size-4" />
+            Down 0% this period <TrendingDown className="size-4" />
           </div>
           <div className="text-muted-foreground">Acquisition needs attention</div>
         </CardFooter>

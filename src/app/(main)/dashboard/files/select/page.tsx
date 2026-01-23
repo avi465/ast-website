@@ -15,7 +15,7 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-col gap-4 p-4">
+    <div className="@container/main flex flex-col gap-4 md:gap-6">
       <FileView />
       <div className={"flex items-center justify-center"}>
         <Button variant="outline" size="sm" type="button" onClick={handlePick}>

@@ -16,7 +16,7 @@ export default function Page() {
   // if (response.isError) return <div>Error loading files.</div>;
 
   return (
-    <div className="flex flex-col gap-4 p-4">
+    <div className="@container/main flex flex-col gap-4 md:gap-6">
       <FileView />
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {response.data?.map((file) => (

@@ -67,11 +67,20 @@ export const sidebarItems: NavGroup[] = [
         title: "Lesson",
         url: "/dashboard/lesson",
         icon: ChartBar,
+        subItems: [
+          { title: "All lessons", url: "/dashboard/lesson", newTab: false },
+          { title: "Create lessons", url: "/dashboard/lesson/create", newTab: false },
+          { title: "Edit lessons", url: "/dashboard/lesson/edit", newTab: false },
+        ],
       },
       {
         title: "Files",
         url: "/dashboard/files",
         icon: FolderClosed,
+        subItems: [
+          { title: "All files", url: "/dashboard/files", newTab: false },
+          { title: "Add files", url: "/dashboard/files/add", newTab: false },
+        ],
       },
       // {
       //   title: "Finance",
@@ -98,75 +107,75 @@ export const sidebarItems: NavGroup[] = [
       // },
     ],
   },
-  // {
-  //   id: 2,
-  //   label: "Pages",
-  //   items: [
-  //     {
-  //       title: "Email",
-  //       url: "/mail",
-  //       icon: Mail,
-  //       comingSoon: true,
-  //     },
-  //     {
-  //       title: "Chat",
-  //       url: "/chat",
-  //       icon: MessageSquare,
-  //       comingSoon: true,
-  //     },
-  //     {
-  //       title: "Calendar",
-  //       url: "/calendar",
-  //       icon: Calendar,
-  //       comingSoon: true,
-  //     },
-  //     {
-  //       title: "Kanban",
-  //       url: "/kanban",
-  //       icon: Kanban,
-  //       comingSoon: true,
-  //     },
-  //     {
-  //       title: "Invoice",
-  //       url: "/invoice",
-  //       icon: ReceiptText,
-  //       comingSoon: true,
-  //     },
-  //     {
-  //       title: "Users",
-  //       url: "/users",
-  //       icon: Users,
-  //       comingSoon: true,
-  //     },
-  //     {
-  //       title: "Roles",
-  //       url: "/roles",
-  //       icon: Lock,
-  //       comingSoon: true,
-  //     },
-  //     {
-  //       title: "Authentication",
-  //       url: "/auth",
-  //       icon: Fingerprint,
-  //       subItems: [
-  //         { title: "Login v1", url: "/auth/v1/login", newTab: true },
-  //         { title: "Login v2", url: "/auth/v2/login", newTab: true },
-  //         { title: "Register v1", url: "/auth/v1/register", newTab: true },
-  //         { title: "Register v2", url: "/auth/v2/register", newTab: true },
-  //       ],
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 3,
-  //   label: "Misc",
-  //   items: [
-  //     {
-  //       title: "Others",
-  //       url: "/others",
-  //       icon: SquareArrowUpRight,
-  //       comingSoon: true,
-  //     },
-  //   ],
-  // },
+  {
+    id: 2,
+    label: "Pages",
+    items: [
+      // {
+      //   title: "Email",
+      //   url: "/mail",
+      //   icon: Mail,
+      //   comingSoon: true,
+      // },
+      // {
+      //   title: "Chat",
+      //   url: "/chat",
+      //   icon: MessageSquare,
+      //   comingSoon: true,
+      // },
+      // {
+      //   title: "Calendar",
+      //   url: "/calendar",
+      //   icon: Calendar,
+      //   comingSoon: true,
+      // },
+      // {
+      //   title: "Kanban",
+      //   url: "/kanban",
+      //   icon: Kanban,
+      //   comingSoon: true,
+      // },
+      {
+        title: "Invoice",
+        url: "/invoice",
+        icon: ReceiptText,
+        comingSoon: true,
+      },
+      {
+        title: "Users",
+        url: "/users",
+        icon: Users,
+        comingSoon: true,
+      },
+      // {
+      //   title: "Roles",
+      //   url: "/roles",
+      //   icon: Lock,
+      //   comingSoon: true,
+      // },
+      // {
+      //   title: "Authentication",
+      //   url: "/auth",
+      //   icon: Fingerprint,
+      //   subItems: [
+      //     { title: "Login v1", url: "/auth/v1/login", newTab: true },
+      //     { title: "Login v2", url: "/auth/v2/login", newTab: true },
+      //     { title: "Register v1", url: "/auth/v1/register", newTab: true },
+      //     { title: "Register v2", url: "/auth/v2/register", newTab: true },
+      //   ],
+      // },
+    ],
+  },
+  {
+    id: 3,
+    label: "Misc",
+    items: [
+      {
+        title: "Others",
+        url: "/others",
+        icon: SquareArrowUpRight,
+        comingSoon: true,
+      },
+    ],
+  },
 ];

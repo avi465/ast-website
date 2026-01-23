@@ -1,0 +1,28 @@
+/*
+label: Cyber Noir
+value: cyber-noir
+*/
+
+:root[data-theme-preset="cyber-noir"] {
+    --radius: 6px;
+    --background: oklch(0.08 0.02 260);
+    --foreground: oklch(0.96 0 0);
+
+    --card: oklch(0.14 0.02 260);
+    --card-foreground: oklch(0.96 0 0);
+
+    --primary: oklch(0.72 0.25 270);
+    --primary-foreground: oklch(0.05 0 0);
+
+    --secondary: oklch(0.78 0.22 140);
+    --secondary-foreground: oklch(0.05 0 0);
+
+    --accent: oklch(0.75 0.28 30);
+    --accent-foreground: oklch(0.05 0 0);
+
+    --border: oklch(0.25 0 0);
+    --muted: oklch(0.18 0 0);
+    --muted-foreground: oklch(0.7 0 0);
+
+    --ring: var(--primary);
+}

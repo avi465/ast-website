@@ -1,0 +1,28 @@
+/*
+label: Solar Pastel
+value: solar-pastel
+*/
+
+:root[data-theme-preset="solar-pastel"] {
+    --radius: 10px;
+    --background: oklch(0.97 0.02 90);
+    --foreground: oklch(0.2 0 0);
+
+    --card: oklch(0.99 0.01 90);
+    --card-foreground: oklch(0.2 0 0);
+
+    --primary: oklch(0.7 0.18 35);
+    --primary-foreground: oklch(1 0 0);
+
+    --secondary: oklch(0.78 0.12 160);
+    --secondary-foreground: oklch(0.1 0 0);
+
+    --accent: oklch(0.75 0.15 260);
+    --accent-foreground: oklch(0.1 0 0);
+
+    --border: oklch(0.88 0 0);
+    --muted: oklch(0.93 0 0);
+    --muted-foreground: oklch(0.45 0 0);
+
+    --ring: var(--primary);
+}

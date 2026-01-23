@@ -33,11 +33,35 @@ export const THEME_PRESET_OPTIONS = [
     },
   },
   {
+    label: "Cyber Noir",
+    value: "cyber-noir",
+    primary: {
+      light: "oklch(0.72 0.25 270)",
+      dark: "",
+    },
+  },
+  {
+    label: "Paper Ink",
+    value: "paper-ink",
+    primary: {
+      light: "oklch(0.45 0.18 30)",
+      dark: "",
+    },
+  },
+  {
     label: "Soft Pop",
     value: "soft-pop",
     primary: {
       light: "oklch(0.5106 0.2301 276.9656)",
       dark: "oklch(0.6801 0.1583 276.9349)",
+    },
+  },
+  {
+    label: "Solar Pastel",
+    value: "solar-pastel",
+    primary: {
+      light: "oklch(0.7 0.18 35)",
+      dark: "",
     },
   },
   {
