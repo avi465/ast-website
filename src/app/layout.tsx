@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import { APP_CONFIG } from "@/config/app-config";
+import { FileSelectProvider } from "@/context/file-select-context";
 import { QueryProvider } from "@/provider/query-provider";
 import { getPreference } from "@/server/server-actions";
 import { PreferencesStoreProvider } from "@/stores/preferences/preferences-provider";
@@ -31,7 +32,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     >
       <body className={`${inter.className} min-h-screen antialiased`}>
         <PreferencesStoreProvider themeMode={themeMode} themePreset={themePreset}>
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            <FileSelectProvider>{children}</FileSelectProvider>
+          </QueryProvider>
         </PreferencesStoreProvider>
       </body>
     </html>
