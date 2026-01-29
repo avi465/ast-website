@@ -25,51 +25,11 @@ export const THEME_PRESET_OPTIONS = [
     },
   },
   {
-    label: "Aurora Glass",
-    value: "aurora-glass",
-    primary: {
-      light: "oklch(0.68 0.2 265)",
-      dark: "",
-    },
-  },
-  {
     label: "Brutalist",
     value: "brutalist",
     primary: {
       light: "oklch(0.6489 0.237 26.9728)",
       dark: "oklch(0.7044 0.1872 23.1858)",
-    },
-  },
-  {
-    label: "Clean AI",
-    value: "clean-ai",
-    primary: {
-      light: "oklch(0.65 0.16 210)",
-      dark: "",
-    },
-  },
-  {
-    label: "Enterprise Slate",
-    value: "enterprise-slate",
-    primary: {
-      light: "oklch(0.58 0.14 250)",
-      dark: "oklch(0.7 0.16 250)",
-    },
-  },
-  {
-    label: "Midnight Ops",
-    value: "midnight-ops",
-    primary: {
-      light: "oklch(0.7 0.2 260)",
-      dark: "oklch(0.7 0.2 260)",
-    },
-  },
-  {
-    label: "Obsidian Matrix",
-    value: "obsidian-matrix",
-    primary: {
-      light: "oklch(0.75 0.28 145)",
-      dark: "oklch(0.75 0.28 145)",
     },
   },
   {
